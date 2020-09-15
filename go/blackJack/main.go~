@@ -1,0 +1,46 @@
+package main
+import(
+"fmt"
+"strings"
+"strconv"
+)
+
+func handTotal(hand string) int{
+     total := 0
+     for _, i := range strings.Split(hand, ""){
+     	 var n int
+	 if i == "A"{
+	    i = "11"
+	 }
+	 n, err := strconv.Atoi(i)
+	 if err != nil{
+	    n = 10
+	 }
+	 total = total + n
+     }
+
+     return total
+}
+
+
+// PlayerWins determines if the player has a winning blackjack hand.
+func PlayerWins(playerHand string, dealerHand string) bool {
+     playerHandTotal := handTotal(playerHand)
+     dealerHandTotal := handTotal(dealerHand)
+     if playerHandTotal > dealerHandTotal{
+     	return true
+     }
+     return false
+     
+}
+
+func main(){
+     if ! PlayerWins("A9", "J8"){
+     	panic("Fail 1")
+     }
+     fmt.Println("pass 1")
+     if PlayerWins("54X", "KQ"){
+     	panic("Fail 2")
+     }
+     fmt.Println("pass 2")
+}
